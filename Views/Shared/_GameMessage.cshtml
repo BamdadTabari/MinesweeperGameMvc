@@ -1,0 +1,17 @@
+﻿@model MinesweeperGameMvc.Models.MinesweeperBoard
+
+<div id="gameMessageContent">
+    @if (Model.IsGameOver)
+    {
+        <p>Game Over! You hit a mine!</p>
+    }
+    else if (Model.IsGameWon)
+    {
+        <p>Congratulations! You've completed Level @Model.Level! Moving to the next level...</p>
+    }
+    else
+    {
+        <p>Level @Model.Level - Mines Remaining: @Model.MineCount</p>
+    }
+</div>
+

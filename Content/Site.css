@@ -1,0 +1,52 @@
+﻿/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #333;
+}
+
+.hidden {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.revealed {
+    background-color: #eee;
+}
+
+#gameMessage {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+#gameMessageContent p {
+    color: red;
+    font-weight: bold;
+}

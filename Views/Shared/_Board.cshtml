@@ -1,0 +1,42 @@
+﻿@model MinesweeperGameMvc.Models.MinesweeperBoard
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div id="gameMessageContent">
+    @if (Model.IsGameOver)
+    {
+        <p>Game Over! You hit a mine!</p>
+    }
+    else if (Model.IsGameWon)
+    {
+        <p>Congratulations! You've won!</p>
+    }
+</div>
+
+<table>
+    @for (int r = 0; r < Model.Rows; r++)
+    {
+        <tr>
+            @for (int c = 0; c < Model.Columns; c++)
+            {
+                var cell = Model.Cells[r, c];
+                if (cell.IsRevealed)
+                {
+                    <td class="revealed">
+                        @if (cell.IsMine)
+                        {
+                            <span>💣</span> <!-- Display a bomb icon for mines -->
+                        }
+                        else
+                        {
+                            <span>@cell.AdjacentMines</span>
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td class="hidden" onclick="revealCell(@r, @c)"></td>
+                }
+            }
+        </tr>
+    }
+</table>

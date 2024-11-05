@@ -1,0 +1,33 @@
+﻿@model MinesweeperGameMvc.Models.MinesweeperBoard
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h1>Minesweeper</h1>
+<div id="gameMessage" style="align-items:center; justify-content:center">
+    @{ Html.RenderPartial("_GameMessage", Model); }
+</div>
+<div id="board" style="align-items:center; justify-content:center">
+    @{ Html.RenderPartial("_Board", Model); }
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function revealCell(row, col) {
+        if ($("#gameMessage").text().includes("Game Over")) {
+            return; // Prevent further clicks if game is over
+        }
+
+        $.post("/Game/RevealCell", { row: row, col: col })
+            .done(function (data) {
+                $("#board").html(data);
+                // Update the game message after each move
+                $.get("/Game/GetGameMessage", function (message) {
+                    $("#gameMessage").html(message);
+                    if (message.includes("Congratulations")) {
+                        // Automatically proceed to next level after a short delay
+                        setTimeout(function () {
+                            revealCell(-1, -1); // Trigger board reset for next level
+                        }, 2000); // 2-second delay for transition
+                    }
+                });
+            });
+    }
+</script>
